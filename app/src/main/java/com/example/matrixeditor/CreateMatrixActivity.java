@@ -1,5 +1,6 @@
 package com.example.matrixeditor;
 
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -25,28 +26,32 @@ public class CreateMatrixActivity extends AppCompatActivity {
         createMatrixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Получение ширины и высоты матрицы от пользователя
+
                 int width = Integer.parseInt(widthEditText.getText().toString());
                 int height = Integer.parseInt(heightEditText.getText().toString());
 
 
-                //Создание новой матрицы с указанными размерами (width x height)
                 createNewMatrix(width, height);
 
-                //Переход к другой активности или выполнение других действий
+
             }
         });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Возврат в главное меню (Окно 1)
+                // Возврат в главное меню (Окно 1)
                 finish();
             }
         });
     }
 
     private void createNewMatrix(int width, int height) {
+        com.example.matrixeditor.Matrix matrix = new com.example.matrixeditor.Matrix();
+        matrix.setWidth(width);
+        matrix.setHeight(height);
 
+        MatrixDatabaseHelper dbHelper = new MatrixDatabaseHelper(this);
+        long matrixId = dbHelper.insertMatrix(matrix);
     }
 }
